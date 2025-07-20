@@ -32,7 +32,7 @@ development:
         #     - use: web
 
         # The name of the user for authentication.
-        user: 'user'
+        user: 'root'
 
         # The password of the user for authentication.
         password: 'password'
@@ -292,7 +292,7 @@ test:
     default:
       database: tultul_test
       hosts:
-        - localhost:27017
+        - db:27017
       options:
         read:
           mode: :primary
