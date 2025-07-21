@@ -17,11 +17,6 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    raise ArgumentError, "Email address is required" unless user_params[:email_address].present?
-    raise ArgumentError, "Password is required" unless user_params[:password].present?
-    raise ArgumentError, "Password confirmation is required" unless user_params[:password_confirmation].present?
-    raise ArgumentError, "Password confirmation does not match password" unless user_params[:password] == user_params[:password_confirmation]
-
     @user = User.new(email_address: user_params[:email_address], password: user_params[:password])
 
     respond_to do |format|
