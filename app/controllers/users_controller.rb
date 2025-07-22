@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  allow_unauthenticated_access only: %i[ new create ]
   before_action :set_user, only: %i[ show update destroy ]
 
   # GET /users or /users.json
@@ -21,6 +22,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        layout = @user.layouts.create(direction: "horizontal", contents: [])
+        @user.update(root_layout: layout.id)
         format.html { redirect_to @user, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else

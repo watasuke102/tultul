@@ -12,6 +12,13 @@ class User
   field :password, type: String
   field :password_digest, type: String
 
+  has_many :layouts, dependent: :destroy
+  # `@user.layouts.create` must be called after calling `@user.save`
+  # it means that initially user cannot have root_layout
+  # so I make it optional but validate it on update
+  belongs_to :root_layout, class_name: "Layout", optional: true
+  validates :root_layout, presence: true, on: :update
+
   def normalize_email_address
     self.email_address = email_address.strip.downcase if email_address.present?
   end
