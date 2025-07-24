@@ -1,0 +1,27 @@
+.app_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c4c4c4dd;
+  padding: 0 8px;
+}
+.app_header_button {
+  border: none;
+  display: grid;
+  grid-template-rows: 28px auto;
+  margin-top: 4px;
+  font-size: 0.85em;
+  border: 2px solid var(--text-color);
+  border-radius: 4px 4px 0 0; /* top only */
+  border-bottom: none;
+}
+.app_header_link {
+  color: var(--text-color);
+  font-size: 1.1em;
+  border: none;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
