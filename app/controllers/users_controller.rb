@@ -18,17 +18,37 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(email_address: user_params[:email_address], password: user_params[:password])
-
-    respond_to do |format|
-      if @user.save
-        layout = @user.layouts.create(direction: "horizontal", contents: [])
-        @user.update(root_layout: layout.id)
-        format.html { redirect_to @user, notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
+    # If this check is moved in `respond_to` next to this block, the error is not shown (idk why)
+    if user_params[:password] != user_params[:password_confirmation]
+      @user = User.new(email_address: user_params[:email_address])
+      @errors = [ "パスワードと確認用パスワードが一致しません。" ]
+      respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    respond_to do |format|
+      begin
+        @user = User.new(email_address: user_params[:email_address], password: user_params[:password])
+        if @user.save
+          root_layout = @user.layouts.create(direction: "horizontal", child_type: "layout", contents: [])
+          @user.update(root_layout: root_layout.id)
+          @errors = []
+          format.html { redirect_to root_path, notice: "User was successfully created." }
+          format.json { render :show, status: :created, location: @user }
+        else
+          @errors = @user.errors.map { |error| error.full_message }
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @errors, status: :unprocessable_entity }
+        end
+      rescue
+        if @user.errors.empty?
+          @user.destroy
+        end
+        @errors = [ "ユーザーの作成中にエラーが発生しました。一定時間後に再試行してください。" ]
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @errors, status: :unprocessable_entity }
       end
     end
   end
