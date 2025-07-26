@@ -35,19 +35,21 @@ class UsersController < ApplicationController
             clock_component = @user.layouts.create(
               direction: "vertical",
               child_type: "module",
+              renew_period_minute: 1,
               contents: [
                 { type: "spacer" },
-                { type: "text", font_size: 48, text: "12:34\n2025-01-01" },
+                { type: "text", font_size: 56, text_align: "center", text: "12:34\n2025-01-01" },
                 { type: "spacer" }
               ]
             )
             welcome_component = @user.layouts.create(
               direction: "vertical",
               child_type: "module",
+              renew_period_minute: 0,
               contents: [
                 { type: "spacer" },
-                { type: "text", font_size: 32, text: "Tultul へようこそ！" },
-                { type: "text", font_size: 16, text: "コンポーネントやレイアウトを編集してみましょう。" },
+                { type: "text", font_size: 32, text_align: "left", text: "Tultul へようこそ！" },
+                { type: "text", font_size: 16, text_align: "left", text: "コンポーネントやレイアウトを編集してみましょう。" },
                 { type: "spacer" }
               ]
             )
