@@ -32,18 +32,41 @@ class UsersController < ApplicationController
       begin
         @user = User.new(email_address: user_params[:email_address], password: user_params[:password])
         if @user.save
-          root_layout = @user.layouts.create(direction: "horizontal", child_type: "layout", contents: [])
+            clock_component = @user.layouts.create(
+              direction: "vertical",
+              child_type: "module",
+              contents: [
+                { type: "spacer" },
+                { type: "text", font_size: 48, text: "12:34\n2025-01-01" },
+                { type: "spacer" }
+              ]
+            )
+            welcome_component = @user.layouts.create(
+              direction: "vertical",
+              child_type: "module",
+              contents: [
+                { type: "spacer" },
+                { type: "text", font_size: 32, text: "Tultul へようこそ！" },
+                { type: "text", font_size: 16, text: "コンポーネントやレイアウトを編集してみましょう。" },
+                { type: "spacer" }
+              ]
+            )
+          root_layout = @user.layouts.create(direction: "horizontal", child_type: "layout", contents: [ clock_component.id, welcome_component.id ])
           @user.update(root_layout: root_layout.id)
           @errors = []
-          format.html { redirect_to root_path, notice: "User was successfully created." }
+          format.html { redirect_to new_session_path, notice: "User was successfully created." }
           format.json { render :show, status: :created, location: @user }
         else
-          @errors = @user.errors.map { |error| error.full_message }
+          @errors = @user.errors.map { |error| error.full_messages }
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @errors, status: :unprocessable_entity }
         end
       rescue
-        if @user.errors.empty?
+        puts "----------------------------------------"
+        puts "[debug] Exception occurs while creating user"
+        p $!
+        puts "----------------------------------------"
+        if @user and @user.errors.empty?
           @user.destroy
         end
         @errors = [ "ユーザーの作成中にエラーが発生しました。一定時間後に再試行してください。" ]

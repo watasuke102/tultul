@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "app/dashboard"
+  get "layout/:id" => "layouts#show"
   resources :users, except: [ :index, :show, :edit, :destroy ]
   resource :session
   resources :passwords, param: :token

@@ -1,0 +1,21 @@
+<% case layout.direction %>
+<% when 'horizontal' %>
+<div class="layout_container" style="grid-template-columns: repeat(<%= layout.contents.length %>, 1fr);">
+<% when 'vertical' %>
+<div class="layout_container" style="grid-template-rows: repeat(<%= layout.contents.length %>, 1fr);">
+<% end %>
+
+<% for child_module in layout.contents %>
+<% case child_module['type'] %>
+  <% when 'text' %>
+    <span style="font-size: <%= child_module['font_size'] %>px">
+      <%= child_module['text'] %>
+    </span>
+  
+  <% else %> <%# 'spacer' or otherwise  %>
+    <div></div>
+
+<% end %>
+<% end %>
+
+</div>

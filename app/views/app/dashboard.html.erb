@@ -1,3 +1,1 @@
-<%= @user.inspect %>
-<hr>
-<%= @user.root_layout.inspect %>
+<%= render @user.root_layout, locals: { layout: @user.root_layout } %>

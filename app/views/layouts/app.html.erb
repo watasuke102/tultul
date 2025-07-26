@@ -6,7 +6,7 @@
     </button>
     <%= button_to "Logout", session_path, method: :delete, class: "app_header_link" %>
   </header>
-  <main>
+  <main class="app_main">
     <%= yield %>
   </main>
 <% end %>
