@@ -38,7 +38,7 @@ class UsersController < ApplicationController
               renew_period_minute: 1,
               contents: [
                 { type: "spacer" },
-                { type: "text", font_size: 56, text_align: "center", text: "12:34\n2025-01-01" },
+                { type: "text", font_size: 56, text_align: "center", text: "{builtin.time.hour}:{builtin.time.min}\n{builtin.time.year}-{builtin.time.month}-{builtin.time.day}" },
                 { type: "spacer" }
               ]
             )

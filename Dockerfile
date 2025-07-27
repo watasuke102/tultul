@@ -19,10 +19,10 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl sudo libjemalloc2 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Set production environment
 ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    TZ="Asia/Tokyo"
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
