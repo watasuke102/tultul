@@ -1,1 +1,14 @@
-<%= render @user.root_layout, locals: { layout: @user.root_layout } %>
+<turbo-frame id="dashboard_frame">
+	<%= render @user.root_layout, locals: { layout: @user.root_layout } %>
+</turbo-frame>
+
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function() {
+		setInterval(function() {
+			const frame = document.getElementById("dashboard_frame");
+			if (frame) {
+				frame.src = "/app/dashboard";
+			}
+		}, 1000 * 60); // Refresh every minute
+	});
+</script>
