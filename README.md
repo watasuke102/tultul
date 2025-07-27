@@ -2,6 +2,16 @@
 
 Grid-driven dashboard builder for Web browser
 
+## How to use
+
+Clone this repository, and `docker compose up` (or set MongoDB up properly, edit `config/mongoid.yml`, and `bundle install && bin/rails server`)
+
+## Test
+
+`docker compose up -d` first, then `docker compose exec web bin/rails test -vd`
+
+note: `-vd` equals to `--verbose --defer-output`, which are optional (but recommended)
+
 ## LICENSE
 
 Dual-licensed; MIT (`LICENSE-MIT` or [The MIT License – Open Source Initiative](https://opensource.org/license/mit/)) or MIT SUSHI-WARE LICENSE (`LICENSE-MIT_SUSHI.md`)

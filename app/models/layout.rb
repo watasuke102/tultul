@@ -15,4 +15,36 @@ class Layout
   field :contents, type: Array, default: []
 
   belongs_to :user
+
+  validate :validate_and_set_default_value_for_contents
+  def validate_and_set_default_value_for_contents
+    for content in contents
+      case child_type
+      when "layout"
+        unless content.is_a?(String)
+          errors.add(:contents, "Contents of Layout(child_type: layout) must be an array of Layout IDs")
+          return
+        end
+
+      when "module"
+        unless content.is_a?(Hash) && content["type"].present?
+          errors.add(:contents, "Contents of Layout(child_type: module) must be an array of Module object")
+          return
+        end
+        case content["type"]
+        when "text"
+          unless content["font_size"].is_a?(Integer) && content["font_size"] > 0
+            content["font_size"] = 16
+          end
+          unless content["text_align"].in? %w[left center right]
+            content["text_align"] = "left"
+          end
+        when "spacer"
+          # pass
+        else
+          errors.add(:contents, "Unknown contentule type: #{content['type']}")
+        end
+      end
+    end
+  end
 end

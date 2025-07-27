@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       begin
         @user = User.new(email_address: user_params[:email_address], password: user_params[:password])
         if @user.save
-            clock_component = @user.layouts.create(
+            clock_component = @user.layouts.create!(
               direction: "vertical",
               child_type: "module",
               renew_period_minute: 1,
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
                 { type: "spacer" }
               ]
             )
-            welcome_component = @user.layouts.create(
+            welcome_component = @user.layouts.create!(
               direction: "vertical",
               child_type: "module",
               renew_period_minute: 0,

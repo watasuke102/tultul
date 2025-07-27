@@ -6,7 +6,10 @@ module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
-
-    # Add more helper methods to be used by all tests here...
+      Minitest.after_run do
+        Mongoid.default_client.collections.each do |collection|
+          collection.drop
+        end
+      end
   end
 end
