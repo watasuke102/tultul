@@ -4,6 +4,10 @@
 
 <script type="text/javascript">
 	document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(document.location.search);
+    if (params.get('disable_auto_refresh') === 'true') {
+      return;
+    }
 		setInterval(function() {
 			const frame = document.getElementById("dashboard_frame");
 			if (frame) {
