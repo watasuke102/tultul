@@ -69,7 +69,12 @@ module LayoutHelper
   def module_style(mod)
     case mod["type"]
     when "text"
-      "font-size: #{mod['font_size']}px; text-align: #{mod['text_align']};"
+      [
+        "display: inline-block",
+        "width: 100%",
+        "font-size: #{mod['font_size']}px",
+        "text-align: #{mod['text_align']}"
+      ].join("; ")
     else
       ""
     end

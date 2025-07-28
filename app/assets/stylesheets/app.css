@@ -1,9 +1,11 @@
+:root {
+  --header-height: 56px;
+}
 .app_header {
-  height: 56px;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background-color: #c4c4c4dd;
+  background-color: #a9a9a9dd;
   padding: 0 8px;
 }
 .app_header_button {
@@ -16,6 +18,9 @@
   border-radius: 4px 4px 0 0; /* top only */
   border-bottom: none;
 }
+.app_header_button {
+  background-color: var(--bg-color);
+}
 .app_header_link {
   color: var(--text-color);
   font-size: 1.1em;
@@ -26,9 +31,14 @@
     }
   }
 }
+form:has(.app_header_link) {
+  display: flex;
+  align-items: center;
+}
 
 .app_main {
+  padding: 8px;
   width: 100%;
-  height: calc(100dvh - 56px);
+  height: calc(100dvh - var(--header-height));
 }
 
