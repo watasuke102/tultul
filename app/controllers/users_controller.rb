@@ -53,7 +53,7 @@ class UsersController < ApplicationController
                 { type: "spacer" }
               ]
             )
-          root_layout = @user.layouts.create(direction: "horizontal", child_type: "layout", contents: [ clock_component.id, welcome_component.id ])
+          root_layout = @user.layouts.create!(direction: "horizontal", child_type: "layout", contents: [ clock_component.id, welcome_component.id ])
           @user.update(root_layout: root_layout.id)
           @errors = []
           format.html { redirect_to new_session_path, notice: "User was successfully created." }

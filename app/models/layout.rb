@@ -21,7 +21,7 @@ class Layout
     for content in contents
       case child_type
       when "layout"
-        unless content.is_a?(String)
+        unless content.is_a?(BSON::ObjectId)
           errors.add(:contents, "Contents of Layout(child_type: layout) must be an array of Layout IDs")
           return
         end
