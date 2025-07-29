@@ -2,7 +2,11 @@ class DatabasesController < ApplicationController
   before_action :set_database, only: %i[ show edit update destroy ]
   # POST /databases or /databases.json
   def create
-    @database = Current.user.databases.create(database_params)
+    create_params = database_params
+    if create_params[:title] == nil
+      create_params[:title] = "Database #{Current.user.databases.length + 1}"
+    end
+    @database = Current.user.databases.create(create_params)
 
     respond_to do |format|
       if @database.save
