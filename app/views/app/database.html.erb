@@ -1,6 +1,6 @@
-<nav class="database_menu" data-controller="databaseSelector">
+<nav class="database_menu">
   <h1>Database</h1>
-  <select id="database_select">
+  <select id="database_select" onchange="Turbo.visit('<%= app_database_path %>/' + event.target.value)">
     <option value="">---データベースを選択---</option>
     <% @user.databases.each do |db| %>
       <option value="<%= db.id %>" <%= "selected" if db.id.to_s == params[:id] %>><%= db.title %></option>
