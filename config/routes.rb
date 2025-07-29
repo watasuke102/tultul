@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get "layout/:id" => "layouts#show"
   resources :users, except: [ :index, :show, :edit, :destroy ]
   resource :session
   resources :passwords, param: :token
@@ -14,9 +13,14 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   #
 
-  get "app/dashboard"    => "app#dashboard", as: :dashboard
-  get "app/database"     => "app#database", as: :database
-  get "app/database/:id" => "app#database"
+  get "app/dashboard"    => "app#dashboard", as: :app_dashboard
+
+  get "app/database"     => "app#database", as: :app_database
+  get "app/database/new" => "databases#new", as: :new_database
+  get "app/database/:id" => "app#database", as: :app_database_show
+
+  get "layout/:id" => "layouts#show"
+  resources :databases, except: [ :index, :show, :new ]
 
   root to: redirect("/app/dashboard")
 end

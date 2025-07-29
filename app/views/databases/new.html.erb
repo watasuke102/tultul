@@ -1,0 +1,11 @@
+<% content_for :title, "New database" %>
+
+<h1>New database</h1>
+
+<%= render "form", database: @database %>
+
+<br>
+
+<div>
+  <%= link_to "Back to databases", app_database_path %>
+</div>

@@ -4,3 +4,16 @@
   display: grid;
   grid-template-columns: 300px 1fr;
 }
+
+.database_menu {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.database_add_button {
+  height: 20px;
+  padding: 4px;
+  border: 1px solid var(--text-color);
+  border-radius: 2px;
+}

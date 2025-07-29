@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Databases" %>
+
+<h1>Databases</h1>
+
+<div id="databases">
+  <% @databases.each do |database| %>
+    <%= render database %>
+    <p>
+      <%= link_to "Show this database", database %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New database", new_database_path %>
