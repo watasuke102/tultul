@@ -1,0 +1,14 @@
+<section>
+  <h1>Database</h1>
+  <% if @user.databases.empty? %>
+  <% else %>
+    <select id="database_select" name="database_select">
+      <% @user.databases.each do |db| %>
+        <option value="<%= db.id %>"><%= db.title %></option>
+      <% end %>
+    </select>
+    <%= turbo_frame_tag "database_view" do %>
+      <% render "app/database_view", database: @user.databases.find(params[:id]) %>
+    <% end %>
+  <% end %>
+</section>

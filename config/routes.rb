@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   #
 
-  get "app/dashboard" => "app#dashboard", as: :dashboard
+  get "app/dashboard"    => "app#dashboard", as: :dashboard
+  get "app/database"     => "app#database", as: :database
+  get "app/database/:id" => "app#database"
 
   root to: redirect("/app/dashboard")
 end
