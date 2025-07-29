@@ -22,5 +22,6 @@ Rails.application.routes.draw do
   get "layout/:id" => "layouts#show"
   resources :databases, except: [ :index, :show, :new ]
 
+  get "app" => redirect("/app/dashboard")
   root to: redirect("/app/dashboard")
 end

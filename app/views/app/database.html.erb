@@ -1,21 +1,19 @@
-<section>
-  <nav class="database_menu" data-controller="databaseSelector">
-    <h1>Database</h1>
-    <select id="database_select">
-      <option value="">---データベースを選択---</option>
-      <% @user.databases.each do |db| %>
-        <option value="<%= db.id %>" <%= "selected" if db.id.to_s == params[:id] %>><%= db.title %></option>
-      <% end %>
-    </select>
-    <%= button_to databases_path, method: :post, class: "database_add_button" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+<nav class="database_menu" data-controller="databaseSelector">
+  <h1>Database</h1>
+  <select id="database_select">
+    <option value="">---データベースを選択---</option>
+    <% @user.databases.each do |db| %>
+      <option value="<%= db.id %>" <%= "selected" if db.id.to_s == params[:id] %>><%= db.title %></option>
     <% end %>
-  </nav>
-  <% if params[:id] == nil %>
-    <p>データベースを選択してください。</p>
-  <% else %>
-    <%= turbo_frame_tag "database_view" do %>
-      <% render "databases/database", database: @user.databases.find(params[:id]) %>
-    <% end %>
+  </select>
+  <%= button_to databases_path, method: :post, class: "database_add_button" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
   <% end %>
-</section>
+</nav>
+<% if params[:id] == nil %>
+  <p>データベースを選択してください。</p>
+<% else %>
+  <%= turbo_frame_tag "database_view" do %>
+    <% render "databases/database", database: @user.databases.find(params[:id]) %>
+  <% end %>
+<% end %>

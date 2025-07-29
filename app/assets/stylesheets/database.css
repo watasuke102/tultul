@@ -17,3 +17,33 @@
   border: 1px solid var(--text-color);
   border-radius: 2px;
 }
+
+.database_title_edit_area {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.database_title_edit_input_wrapper {
+  position: relative;
+}
+.database_title_edit_input {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--text-color);
+}
+.database_title_edit_icon {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  padding: 8px 0;
+  background-color: var(--bg-color);
+  border-bottom: 2px solid var(--text-color);
+  pointer-events: none;
+}
+.database_title_save_button {
+  border: none;
+  height: 28px;
+}

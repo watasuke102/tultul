@@ -40,6 +40,8 @@ button, input[type="submit"] {
   background-color: transparent;
   border: 2px solid var(--primary-color);
   border-radius: 2px;
+}
+button:not(:disabled), input[type="submit"]:not(:disabled) {
   &:hover {
     cursor: pointer;
   }

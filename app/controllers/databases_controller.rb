@@ -17,9 +17,10 @@ class DatabasesController < ApplicationController
 
   # PATCH/PUT /databases/1 or /databases/1.json
   def update
+    puts "param => #{database_params.inspect}"
     respond_to do |format|
       if @database.update(database_params)
-        format.html { redirect_to @database, notice: "Database was successfully updated." }
+        format.html { redirect_to app_database_show_path(@database), notice: "Database was successfully updated." }
         format.json { render :show, status: :ok, location: @database }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,6 +47,6 @@ class DatabasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def database_params
-      params.fetch(:database, {})
+      params.fetch(:database, {}).permit(:title, :scheme, :content)
     end
 end
