@@ -79,6 +79,16 @@ class DatabasesController < ApplicationController
     end
   end
 
+  # PATCH /databases/:id/:row
+  def update_row
+    @database.content[params[:row].to_i][params[:column]] = params[:value]
+    if @database.save
+      head 200
+    else
+      head 422
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_database

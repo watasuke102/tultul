@@ -17,12 +17,21 @@
     <% end %>
   <% end %>
 
-  <div class="database_table_wrapper">
+  <%= turbo_frame_tag "database_table_wrapper", data: {
+    controller: "databaseEditor",
+    databaseEditor_target: "frame",
+    database_id: database.id.to_s,
+    authenticity_token: form_authenticity_token
+  } do %>
     <table class="database_table">
       <thead>
         <tr>
           <% for column in database.scheme %>
-            <th><%= column[0] %></th>
+            <th>
+              <input name="column_<%= column[0] %>" value="<%= column[0] %>"
+                data-action="change->databaseEditor#onSchemeUpdate"
+                data-column="<%= column[0] %>"></input>
+            </th>
           <% end %>
           <th>
             <%= button_to new_column_database_path(database), method: :post, class: "database_table_add_button" do %>
@@ -32,10 +41,14 @@
         </tr>
       </thead>
       <tbody>
-        <% for row in database.content %>
+        <% database.content.each_with_index do |row, row_index| %>
           <tr>
             <% for column in database.scheme %>
-              <td><%= row[column[0]] %></td>
+              <td>
+                <input name="cell_<%= row_index %>_<%= column[0] %>" value="<%= row[column[0]] %>"
+                  data-action="change->databaseEditor#onCellUpdate"
+                  data-row="<%= row_index %>" data-column="<%= column[0] %>"></input>
+              </td>
             <% end %>
           </tr>
         <% end %>
@@ -46,5 +59,5 @@
         </td></tr>
       </tbody>
     </table>
-  </div>
+  <% end %>
 </div>

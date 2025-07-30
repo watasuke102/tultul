@@ -55,7 +55,7 @@
   height: 28px;
 }
 
-.database_table_wrapper {
+#database_table_wrapper {
   width: 100%;
   overflow: auto;
   padding-right: 8px;
@@ -73,7 +73,6 @@
     z-index: 1;
   }
   & th, td {
-    padding: 4px 8px;
     border: 1px solid var(--text-color);
     height: 1lh;
   }
@@ -84,6 +83,24 @@
     background-color: var(--text-color);
     & svg {
       fill: var(--bg-color);
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  & input {
+    width: 100%;
+    padding: 4px 8px;
+    background-color: transparent;
+    border: none;
+    border-radius: none;
+  }
+  @media (hover: hover) {
+    th:hover {
+      background-color: #484d46;
+    }
+    td:hover {
+      background-color: #e2dcde;
     }
   }
 }
