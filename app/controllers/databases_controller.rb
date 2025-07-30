@@ -1,5 +1,5 @@
 class DatabasesController < ApplicationController
-  before_action :set_database, only: %i[ show edit update destroy ]
+  before_action :set_database, except: [ :create ]
   # POST /databases or /databases.json
   def create
     create_params = database_params
@@ -13,7 +13,7 @@ class DatabasesController < ApplicationController
         format.html { redirect_to app_database_show_path(@database), notice: "Database was successfully created." }
         format.json { render :show, status: :created, location: @database }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to app_database_path, status: :unprocessable_entity }
         format.json { render json: @database.errors, status: :unprocessable_entity }
       end
     end
@@ -40,6 +40,42 @@ class DatabasesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to database_path, status: :see_other, notice: "Database was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /databases/:id/new_column
+  def new_column
+    new_column_name = "新規カラム"
+    if @database.scheme[new_column_name].present?
+      i = 1
+      loop do
+        new_column_name = "新規カラム (#{i})"
+        break unless @database.scheme[new_column_name].present?
+        i += 1
+      end
+    end
+    @database.scheme[new_column_name] = "text"
+    respond_to do |format|
+      if @database.save
+        format.html { redirect_to app_database_show_path(@database) }
+        format.json { render :show, status: :row_created, location: @database }
+      else
+        format.html { redirect_to app_database_show_path(@database), status: :unprocessable_entity }
+        format.json { render json: @database.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  # POST /databases/:id/new_row
+  def new_row
+    @database.content.push({})
+    respond_to do |format|
+      if @database.save
+        format.html { redirect_to app_database_show_path(@database) }
+        format.json { render :show, status: :row_created, location: @database }
+      else
+        format.html { redirect_to app_database_show_path(@database), status: :unprocessable_entity }
+        format.json { render json: @database.errors, status: :unprocessable_entity }
+      end
     end
   end
 

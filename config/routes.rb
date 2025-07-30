@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   get "layout/:id" => "layouts#show"
   resources :databases, except: [ :index, :show, :new ]
+  post "databases/:id/new_row" => "databases#new_row", as: :new_row_database
+  post "databases/:id/new_column" => "databases#new_column", as: :new_column_database
 
   get "app" => redirect("/app/dashboard")
   root to: redirect("/app/dashboard")

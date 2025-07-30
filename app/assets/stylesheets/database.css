@@ -1,21 +1,28 @@
-.database_container {
+#database_container {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  gap: 8px;
+  grid-template-rows: auto 1fr;
 }
 
 .database_menu {
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-bottom: 8px;
 }
 .database_add_button {
   height: 20px;
   padding: 4px;
   border: 1px solid var(--text-color);
   border-radius: 2px;
+}
+
+.database_view {
+  min-height: 0;
+  display: grid;
+  gap: 16px;
+  grid-template-rows: auto 1fr;
 }
 
 .database_title_edit_area {
@@ -47,3 +54,50 @@
   border: none;
   height: 28px;
 }
+
+.database_table_wrapper {
+  width: 100%;
+  overflow: auto;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  scrollbar-color: var(--text-color) transparent;
+}
+.database_table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 1.1em;
+
+  & thead, th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  & th, td {
+    padding: 4px 8px;
+    border: 1px solid var(--text-color);
+    height: 1lh;
+  }
+  & th {
+    text-wrap: nowrap;
+    text-align: left;
+    color: var(--bg-color);
+    background-color: var(--text-color);
+    & svg {
+      fill: var(--bg-color);
+    }
+  }
+}
+.database_table_add_button {
+  display: block;
+  margin: auto 0;
+  padding: 0;
+  min-width: 24px;
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  & svg {
+    height: 24px;
+  }
+}
+
