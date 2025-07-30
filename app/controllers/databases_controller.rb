@@ -65,6 +65,22 @@ class DatabasesController < ApplicationController
       end
     end
   end
+  # PATCH /databases/:id/scheme/name
+  def update_scheme_name
+    head 422 unless params[:before].present? && !params[:after].present?
+    @database.scheme.transform_keys!({ params[:before] => params[:after] })
+    for e in @database.content
+      e.transform_keys!({ params[:before] => params[:after] }) if e[params[:before]].present?
+    end
+
+    if @database.save
+      head 200
+    else
+      head 422
+    end
+  end
+
+
   # POST /databases/:id/new_row
   def new_row
     @database.content.push({})
@@ -78,7 +94,6 @@ class DatabasesController < ApplicationController
       end
     end
   end
-
   # PATCH /databases/:id/:row
   def update_row
     @database.content[params[:row].to_i][params[:column]] = params[:value]

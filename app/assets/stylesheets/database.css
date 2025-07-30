@@ -39,6 +39,7 @@
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--text-color);
+  border-radius: 0;
 }
 .database_title_edit_icon {
   position: absolute;
@@ -89,11 +90,11 @@
     }
   }
   & input {
-    width: 100%;
+    min-width: 100%;
     padding: 4px 8px;
     background-color: transparent;
     border: none;
-    border-radius: none;
+    border-radius: 0;
   }
   @media (hover: hover) {
     th:hover {
