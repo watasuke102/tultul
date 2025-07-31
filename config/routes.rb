@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   #
 
-  get "app/dashboard"    => "app#dashboard", as: :app_dashboard
+  get "app/dashboard" => "app#dashboard", as: :app_dashboard
+  get "app/dashboard/edit" => "app#dashboard_edit", as: :app_dashboard_edit
 
   get "app/database"     => "app#database", as: :app_database
   get "app/database/new" => "databases#new", as: :new_database

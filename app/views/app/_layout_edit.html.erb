@@ -1,0 +1,21 @@
+<% case layout.direction %>
+<% when 'horizontal' %>
+<div class="layout_container layout_container_editing" style="grid-template-columns: repeat(<%= layout.contents.length %>, 1fr);">
+<% when 'vertical' %>
+<div class="layout_container layout_container_editing" style="grid-template-rows: repeat(<%= layout.contents.length %>, 1fr);">
+<% end %>
+
+<div class="layout_editing_tag">
+  <span>Layout</span>
+</div>
+
+<% for child_layout in layout.contents.map { |id| Layout.find(id) } %>
+  <% case child_layout.child_type %>
+  <% when 'layout' %>
+    <%= render partial: 'app/layout_edit', locals: { layout: child_layout } %>
+  <% when 'module' %>
+    <%= render partial: 'app/module_edit', locals: { layout: child_layout } %>
+  <% end %>
+<% end %>
+
+</div>

@@ -1,4 +1,8 @@
 module LayoutHelper
+  def available_module_types
+    %w[text spacer]
+  end
+
   def render_text(text)
     raise ArgumentError unless text.is_a?(String)
     text_array = text.split("")

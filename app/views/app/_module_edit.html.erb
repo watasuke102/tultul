@@ -1,0 +1,21 @@
+<% case layout.direction %>
+<% when 'horizontal' %>
+<div class="layout_container component_container component_container_editing" style="grid-template-columns: repeat(<%= layout.contents.length %>, 1fr);">
+<% when 'vertical' %>
+<div class="layout_container component_container component_container_editing" style="grid-template-rows: repeat(<%= layout.contents.length %>, 1fr);">
+<% end %>
+
+<% for child_module in layout.contents %>
+  <form class="module_edit_container">
+    <select name="type">
+      <%= options_for_select(available_module_types, child_module['type']) %>
+    </select>
+    <div>
+      <% case child_module['type'] %>
+        <% when 'text' %>
+      <% end %>
+    </div>
+  </form>
+<% end %>
+
+</div>

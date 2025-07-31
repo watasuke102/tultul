@@ -30,6 +30,9 @@
   background-color: var(--bg-color);
 }
 
+.app_header_icon_only_link {
+  padding: 12px 0;
+}
 .app_header_link {
   color: var(--text-color);
   font-size: 1.1em;
