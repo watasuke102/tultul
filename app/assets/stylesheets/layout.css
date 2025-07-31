@@ -15,15 +15,14 @@
 
 .layout_container_editing {
   position: relative;
-  padding: 4px;
   border: 2px solid var(--text-color);
   & .layout_editing_tag {
-    content: 'Layout';
     position: absolute;
     top: 0;
     left: 0;
     transform: translateY(-100%);
-    padding: 0 4px;
+    padding: 0 8px;
+    font-size: 1.1em;
     color: var(--bg-color);
     background-color: var(--text-color);
     border: 2px solid var(--text-color);
@@ -32,7 +31,18 @@
   }
   &:hover > .layout_editing_tag {
     display: flex;
+    align-items: center;
     gap: 8px;
+  }
+}
+.layout_editing_delete_button {
+  display: block;
+  border: none;
+  margin: auto;
+  padding: 0;
+  & svg {
+    width: 28px;
+    fill: var(--bg-color);
   }
 }
 .component_container_editing{
