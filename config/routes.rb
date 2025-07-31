@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "app/database/new" => "databases#new", as: :new_database
   get "app/database/:id" => "app#database", as: :app_database_show
 
+  patch "layouts/:id/:content_index" => "layout#update", as: :update_layout
   delete "layouts/:id" => "layout#delete", as: :delete_layout
 
   resources :databases, except: [ :index, :new ]

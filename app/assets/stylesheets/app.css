@@ -31,6 +31,7 @@
 }
 
 .app_header_icon_only_link {
+  height: var(--header-height); /* Webkit doesn't render icon without this */
   padding: 12px 0;
 }
 .app_header_link {

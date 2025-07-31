@@ -33,6 +33,9 @@ class Layout
         end
         case content["type"]
         when "text"
+          if content["font_size"].is_a?(String)
+            content["font_size"] = content["font_size"].to_i
+          end
           unless content["font_size"].is_a?(Integer) && content["font_size"] > 0
             content["font_size"] = 16
           end

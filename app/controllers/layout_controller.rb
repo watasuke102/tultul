@@ -1,6 +1,20 @@
 class LayoutController < ApplicationController
   def show
   end
+
+  def update
+    layout = Current.user.layouts.find(params[:id])
+    layout.contents[params[:content_index].to_i] = params[:module].permit!.to_h
+
+    if layout.save
+      redirect_to app_dashboard_edit_path, status: :ok
+    else
+      p layout
+      p layout.errors.full_messages
+      redirect_to app_dashboard_edit_path, status: :unprocessable_entity
+    end
+  end
+
   def delete
     layout = Current.user.layouts.find(params.expect(:id))
     if layout == Current.user.root_layout
