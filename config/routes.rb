@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :databases, except: [ :index, :show, :new ]
   post "databases/:id/new_row" => "databases#new_row", as: :new_row_database
   patch "databases/:id/:row" => "databases#update_row", as: :update_row_database
+  delete "databases/:id/:row" => "databases#delete_row", as: :delete_row_database
 
   post "databases/:id/new_column" => "databases#new_column", as: :new_column_database
   patch "databases/:id/scheme/name" => "databases#update_scheme_name"

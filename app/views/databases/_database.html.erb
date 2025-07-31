@@ -26,6 +26,7 @@
     <table class="database_table">
       <thead>
         <tr>
+          <th class="database_table_delete_button"></th>
           <% for column in database.scheme %>
             <th>
               <input name="column_<%= column[0] %>" value="<%= column[0] %>"
@@ -43,6 +44,13 @@
       <tbody>
         <% database.content.each_with_index do |row, row_index| %>
           <tr>
+            <td class="database_table_delete_button">
+              <button class="database_table_add_button"
+                data-action="databaseEditor#onDeleteButtonClicked" data-row="<%= row_index %>"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+              </button>
+            </td>
             <% for column in database.scheme %>
               <td>
                 <input name="cell_<%= row_index %>_<%= column[0] %>" value="<%= row[column[0]] %>"
@@ -52,11 +60,14 @@
             <% end %>
           </tr>
         <% end %>
-        <tr><td rowspan="<%= database.content.size %>">
-          <%= button_to new_row_database_path(database), method: :post, class: "database_table_add_button" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
-          <% end %>
-        </td></tr>
+        <tr>
+          <td class="database_table_delete_button"></td>
+          <td colspan="<%= database.scheme.size %>">
+            <%= button_to new_row_database_path(database), method: :post, class: "database_table_add_button" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+            <% end %>
+          </td>
+        </tr>
       </tbody>
     </table>
   <% end %>

@@ -103,6 +103,15 @@ class DatabasesController < ApplicationController
       head 422
     end
   end
+  # DELETE /databases/:id/:row
+  def delete_row
+    @database.content.delete_at(params[:row].to_i)
+    if @database.save
+      head 200
+    else
+      head 422
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

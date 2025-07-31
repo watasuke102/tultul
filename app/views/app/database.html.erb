@@ -1,6 +1,5 @@
 <%= turbo_frame_tag "database_container" do %>
   <nav class="database_menu">
-    <h1>Database</h1>
     <select onchange="Turbo.visit('<%= app_database_path %>/' + event.target.value, {action: 'advance', frame: 'database_container'})">
       <option value="">---データベースを選択---</option>
       <% @user.databases.each do |db| %>

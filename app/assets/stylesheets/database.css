@@ -105,6 +105,11 @@
     }
   }
 }
+.database_table_delete_button {
+  background-color: var(--bg-color) !important;
+  border: none !important;
+  padding: 4px 8px 4px 0;
+}
 .database_table_add_button {
   display: block;
   margin: auto 0;
