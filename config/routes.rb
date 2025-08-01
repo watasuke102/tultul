@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post "layouts/:id/switch_direction" => "layout#switch_direction", as: :switch_direction_layout
   patch "layouts/:id/:content_index" => "layout#update", as: :update_layout
   delete "layouts/:id" => "layout#delete", as: :delete_layout
+  delete "layouts/:id/:module_index" => "layout#delete_module", as: :delete_module_layout
 
   resources :databases, except: [ :index, :new ]
   post "databases/:id/new_row" => "databases#new_row", as: :new_row_database
