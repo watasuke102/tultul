@@ -18,6 +18,20 @@ class LayoutController < ApplicationController
     redirect_to app_dashboard_edit_path
   end
 
+  # POST /layouts/:id
+  def create_child
+    p params.permit(:child_type, :direction)
+    child = Current.user.layouts.create(params.permit(:child_type, :direction))
+    if !child.save
+      redirect_to app_dashboard_edit_path, status: :unprocessable_entity
+      return
+    end
+    parent = Current.user.layouts.find(params[:id])
+    parent.contents << child.id
+    parent.save
+    redirect_to app_dashboard_edit_path
+  end
+
   def delete
     layout = Current.user.layouts.find(params.expect(:id))
     if layout == Current.user.root_layout

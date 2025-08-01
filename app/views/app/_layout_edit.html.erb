@@ -1,3 +1,5 @@
+<% modal_id = "layout_editing_modal_#{layout.id}" %>
+
 <% case layout.direction %>
 <% when 'horizontal' %>
 <div class="layout_container layout_container_editing" style="grid-template-columns: repeat(<%= layout.contents.length %>, 1fr);">
@@ -14,7 +16,10 @@
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z"/></svg>
     <% end %>
   <% end %>
-  <span>Layout</span>
+  <span>Layouts</span>
+  <button class="layout_editing_tag_button" data-micromodal-trigger="<%= modal_id %>">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M440-120v-320H120v-80h320v-320h80v320h320v80H520v320h-80Z"/></svg>
+  </button>
   <% unless layout == Current.user.root_layout %>
     <%= button_to delete_layout_path(layout), method: :delete, class: "layout_editing_tag_button",
       data: { turbo_confirm: "削除したレイアウトは復元できません。\nこのレイアウトを削除してもよろしいですか？" } do
@@ -32,5 +37,24 @@
     <%= render partial: 'app/module_edit', locals: { layout: child_layout } %>
   <% end %>
 <% end %>
+
+<div id="<%= modal_id %>" class="layout_editing_modal">
+  <div class="layout_editing_modal_overlay" tabindex="-1" data-micromodal-close>
+    <div role="dialog" aria-modal="true">
+      <main class="layout_editing_modal_content">
+        <h2>新規レイアウトの追加</h2>
+        <%= form_with url: create_child_layout_path(layout), method: :post do |form| %>
+          <div class="form">
+            <%= form.label :child_type, "子要素の種類" %>
+            <%= form.select :child_type, [["レイアウト", "layout"], ["モジュール", "module"]] %>
+            <%= form.label :direction, "方向" %>
+            <%= form.select :direction, [["横", "horizontal"], ["縦", "vertical"]] %>
+          </div>
+          <%= form.submit "作成" %>
+        <% end %>
+      </main>
+    </div>
+  </div>
+</div>
 
 </div>
