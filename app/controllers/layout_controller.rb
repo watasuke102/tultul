@@ -37,17 +37,6 @@ class LayoutController < ApplicationController
     redirect_to app_dashboard_edit_path, status: parent.save ? :ok : :unprocessable_entity
   end
 
-  # DELETE /layouts/:id
-  def delete
-    layout = Current.user.layouts.find(params.expect(:id))
-    if layout == Current.user.root_layout
-      redirect_to app_dashboard_path, status: :unprocessable_entity
-      return
-    end
-    remove_layout(target: layout, from: Current.user.root_layout)
-    layout.destroy
-    redirect_to app_dashboard_path
-  end
   # DELETE /layouts/:id/:module_index
   def delete_module
     layout = Current.user.layouts.find(params[:id])
@@ -60,12 +49,25 @@ class LayoutController < ApplicationController
     redirect_to app_dashboard_edit_path, status: :ok
   end
 
+  # DELETE /layouts/:id
+  def delete
+    layout = Current.user.layouts.find(params.expect(:id))
+    if layout == Current.user.root_layout
+      redirect_to app_dashboard_edit_path, status: :unprocessable_entity
+      return
+    end
+    remove_layout(target: layout, from: Current.user.root_layout)
+    layout.destroy
+    redirect_to app_dashboard_edit_path
+  end
+
   private
     def remove_layout(target:, from:)
       if from.child_type != "layout"
         return
       end
-      if from.contents.delete(target) != nil
+      if from.contents.delete(target.id) != nil
+        from.save
         return
       end
       from.contents.each do |child_id|
