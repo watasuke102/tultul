@@ -20,16 +20,21 @@ class LayoutController < ApplicationController
 
   # POST /layouts/:id
   def create_child
-    p params.permit(:child_type, :direction)
-    child = Current.user.layouts.create(params.permit(:child_type, :direction))
-    if !child.save
-      redirect_to app_dashboard_edit_path, status: :unprocessable_entity
-      return
-    end
     parent = Current.user.layouts.find(params[:id])
-    parent.contents << child.id
-    parent.save
-    redirect_to app_dashboard_edit_path
+    case parent.child_type
+    when "layout"
+      child = Current.user.layouts.create(params.permit(:child_type, :direction))
+      if !child.save
+        redirect_to app_dashboard_edit_path, status: :unprocessable_entity
+        return
+      end
+      parent.contents << child.id
+
+    when "module"
+      parent.contents << { "type" => "spacer" }
+    end
+
+    redirect_to app_dashboard_edit_path, status: parent.save ? :ok : :unprocessable_entity
   end
 
   def delete

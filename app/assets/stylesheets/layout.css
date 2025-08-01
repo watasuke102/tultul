@@ -11,29 +11,38 @@
   white-space: pre-wrap;
   background-color: #ebebeb;
   border-radius: 2px;
+
+  /* icon exceeds the parent without this */
+  & *:has(svg) {
+    white-space: normal;
+  }
 }
 
 .layout_container_editing {
   position: relative;
   border: 2px solid var(--text-color);
-  & .layout_editing_tag {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateY(-100%);
-    padding: 0 8px;
-    font-size: 1.1em;
-    color: var(--bg-color);
-    background-color: var(--text-color);
-    border: 2px solid var(--text-color);
-
-    display: none;
-  }
-  &:hover > .layout_editing_tag {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+}
+.layout_editing_tag {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+  padding: 4px 8px;
+  font-size: 1.1em;
+  color: var(--bg-color);
+  background-color: var(--text-color);
+  border: 2px solid var(--bg-color);
+  border-bottom-color: var(--text-color);
+}
+.layout_editing_tag_for_component {
+  left: initial;
+  right: 0;
+}
+.layout_container:hover > .layout_editing_tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .layout_editing_tag_button {
   display: block;
@@ -46,7 +55,11 @@
   }
 }
 .component_container_editing{
-  border: 1px solid var(--text-color);
+  position: relative;
+  border: 2px solid transparent;
+  &:hover {
+    border-color: var(--fg-color);
+  }
 }
 
 .module_edit_container {
@@ -61,9 +74,7 @@
 .module_edit_save_button {
   display: block;
   border: none;
-  white-space: normal; /* icon exceeds the button without this */
 }
-
 
 @keyframes modal_fade_in {
     from { opacity: 0; }
