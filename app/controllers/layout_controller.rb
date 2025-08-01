@@ -34,7 +34,8 @@ class LayoutController < ApplicationController
       parent.contents << { "type" => "spacer" }
     end
 
-    redirect_to app_dashboard_edit_path, status: parent.save ? :ok : :unprocessable_entity
+    parent.save
+    redirect_to app_dashboard_edit_path
   end
 
   # DELETE /layouts/:id/:module_index
