@@ -45,6 +45,14 @@ class Layout
           unless content["text"].is_a?(String)
             content["text"] = ""
           end
+        when "database_table"
+          if content["database_id"] != nil
+            begin
+              Current.user.databases.find_by(id: content["database_id"])
+            rescue
+              errors.add(:contents, "Invalid database ID for database_table module")
+            end
+          end
         when "spacer"
           # pass
         else

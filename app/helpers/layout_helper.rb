@@ -1,6 +1,6 @@
 module LayoutHelper
   def available_module_types
-    %w[text spacer]
+    %w[text spacer database_table]
   end
 
   def render_text(text)

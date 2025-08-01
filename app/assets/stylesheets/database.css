@@ -47,7 +47,6 @@
   top: 0;
   right: 0;
   padding: 8px 0;
-  background-color: var(--bg-color);
   border-bottom: 2px solid var(--text-color);
   pointer-events: none;
 }
@@ -106,7 +105,7 @@
   }
 }
 .database_table_delete_button {
-  background-color: var(--bg-color) !important;
+  background-color: transparent !important;
   border: none !important;
   padding: 4px 8px 4px 0;
 }

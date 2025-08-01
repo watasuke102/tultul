@@ -9,6 +9,8 @@
   <% case child_module['type'] %>
     <% when 'text' %>
       <span style="<%= module_style(child_module) %>"><%= render_text(child_module['text']) %></span>
+    <% when 'database_table' %>
+      <%= render Current.user.databases.find_by(id: child_module['database_id']) %>
 
     <% else %> <%# 'spacer' or otherwise  %>
       <div></div>

@@ -50,6 +50,11 @@
         <%= f.label "#{layout.id}_#{i}_text_align", "文字の揃え位置" %>
         <%= f.select "module[text_align]", [['左', 'left'], ['中央', 'center'], ['右', 'right']], selected: child_module['text_align'], id: "#{layout.id}_#{i}_text_align" %>
         <%= f.textarea "module[text]", id: "#{layout.id}_#{i}_text", value: child_module['text'] %>
+      
+      <% when 'database_table' %>
+      <div class="module_edit_area module_edit_area_database_table">
+        <%= f.label "#{layout.id}_#{i}_database_id", "データベース" %>
+        <%= f.select "module[database_id]", Current.user.databases.map{ |db| [db.title, db.id] }, selected: child_module['database_id'], id: "#{layout.id}_#{i}_database_id" %>
 
       <% else %>
       <div>

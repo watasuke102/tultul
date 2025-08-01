@@ -132,3 +132,6 @@
     resize: vertical;
   }
 }
+.module_edit_area_database_table {
+  grid-template-rows: auto 1fr;
+}
