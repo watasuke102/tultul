@@ -48,7 +48,7 @@
         <%= f.label "#{layout.id}_#{i}_font_size",  "文字サイズ" %>
         <%= f.number_field "module[font_size]", id: "#{layout.id}_#{i}_font_size", value: child_module['font_size'] %>
         <%= f.label "#{layout.id}_#{i}_text_align", "文字の揃え位置" %>
-        <%= f.select "module[text_align]", ['left', 'center', 'right'], selected: child_module['text_align'], id: "#{layout.id}_#{i}_text_align" %>
+        <%= f.select "module[text_align]", [['左', 'left'], ['中央', 'center'], ['右', 'right']], selected: child_module['text_align'], id: "#{layout.id}_#{i}_text_align" %>
         <%= f.textarea "module[text]", id: "#{layout.id}_#{i}_text", value: child_module['text'] %>
 
       <% else %>
