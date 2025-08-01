@@ -7,13 +7,13 @@
 
 <% layout.contents.each_with_index do |child_module, i| %>
   <%= form_with url: update_layout_path(layout, i), method: :patch, class: "module_edit_container", data: {
-      controller: "dashboardEditor",
+      controller: "dashboardEditForm",
       layout_id: layout.id.to_s,
       contents_index: i,
       authenticity_token: form_authenticity_token
     } do |f|
   %>
-    <select name="module[type]" data-action="dashboardEditor#onTypeUpdated">
+    <select name="module[type]" data-action="dashboardEditForm#onTypeUpdated">
       <%= options_for_select(available_module_types, child_module['type']) %>
     </select>
     <button type="submit" class="module_edit_save_button">
