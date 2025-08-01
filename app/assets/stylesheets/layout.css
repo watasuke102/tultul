@@ -85,6 +85,7 @@
       to { opacity: 0; }
 }
 .layout_editing_modal {
+  z-index: 8192;
   position: absolute;
   display: none;
 
