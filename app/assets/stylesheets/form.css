@@ -1,3 +1,10 @@
+.form_wrapper {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .form {
   display: grid;
   grid-template-columns: auto 1fr;
