@@ -1,7 +1,4 @@
 class LayoutController < ApplicationController
-  def show
-  end
-
   def update
     layout = Current.user.layouts.find(params[:id])
     layout.contents[params[:content_index].to_i] = params[:module].permit!.to_h

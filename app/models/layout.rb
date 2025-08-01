@@ -42,6 +42,9 @@ class Layout
           unless content["text_align"].in? %w[left center right]
             content["text_align"] = "left"
           end
+          unless content["text"].is_a?(String)
+            content["text"] = ""
+          end
         when "spacer"
           # pass
         else
