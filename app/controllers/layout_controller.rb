@@ -1,13 +1,11 @@
 class LayoutController < ApplicationController
   def update
     layout = Current.user.layouts.find(params[:id])
-    layout.contents[params[:content_index].to_i] = params[:module].permit!.to_h
+    layout.contents[params[:content_index].to_i].merge!(params[:module].permit!.to_h)
 
     if layout.save
       redirect_to app_dashboard_edit_path, status: :ok
     else
-      p layout
-      p layout.errors.full_messages
       redirect_to app_dashboard_edit_path, status: :unprocessable_entity
     end
   end
