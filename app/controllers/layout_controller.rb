@@ -12,6 +12,14 @@ class LayoutController < ApplicationController
     end
   end
 
+  # POST /layout/:id/switch_direction
+  def switch_direction
+    layout = Current.user.layouts.find(params[:id])
+    layout.direction = layout.direction == "horizontal" ? "vertical" : "horizontal"
+    layout.save
+    redirect_to app_dashboard_edit_path
+  end
+
   def delete
     layout = Current.user.layouts.find(params.expect(:id))
     if layout == Current.user.root_layout

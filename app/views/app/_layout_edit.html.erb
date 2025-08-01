@@ -6,6 +6,14 @@
 <% end %>
 
 <div class="layout_editing_tag">
+  <%= button_to switch_direction_layout_path(layout), method: :post, class: "layout_editing_tag_button" do %>
+    <% case layout.direction %>
+    <% when 'horizontal' %>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z"/></svg>
+    <% when 'vertical' %>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z"/></svg>
+    <% end %>
+  <% end %>
   <span>Layout</span>
   <% unless layout == Current.user.root_layout %>
     <%= button_to delete_layout_path(layout), method: :delete, class: "layout_editing_tag_button",
